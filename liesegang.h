@@ -86,6 +86,11 @@ private:
 
 	/*Help Objects*/
 	std::ofstream test_file;
+	std::ofstream a_concentration_hist;
+	std::ofstream b_concentration_hist;
+	std::ofstream c_concentration_hist;
+	std::ofstream s_concentration_hist;
+
 	double I_time_step_; /*will serve as convenient access index for container*/
 	double alpha_a_;
 	double alpha_b_;

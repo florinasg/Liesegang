@@ -12,6 +12,20 @@ Liesegang::Liesegang() {
 
 	test_file.open("Control_File.csv");
 
+	std::string prefix = "(Da:"+std::to_string(D_a_)+",Db:"+std::to_string(D_b_)
+	+",Dc:"+ std::to_string(D_c_)+",N1:"+std::to_string(N_one_)+",N2:"+std::to_string(N_two_)+
+	",R:"+std::to_string(R_)+",a0:"+std::to_string(a_zero_)+",b0:"+
+	std::to_string(b_zero_)+",c0:"+std::to_string(c_zero_)+")";
+
+	/*Creates Directory for */
+	std::string dir_name ="./Results"+prefix;
+	mkdir(dir_name.c_str());
+
+	a_concentration_hist.open("./Results"+prefix+"A_Concentration_"+prefix+".csv");
+	b_concentration_hist.open("./Results"+prefix+"B_Concentration_"+prefix+".csv");
+	c_concentration_hist.open("./Results"+prefix+"C_Concentration_"+prefix+".csv");
+	s_concentration_hist.open("./Results"+prefix+"D_Concentration_"+prefix+".csv");
+
 	/*Initialization of Parameter*/
 
 	a_ = double(DEF_LOWER_BOUND) ;
@@ -33,6 +47,14 @@ Liesegang::Liesegang() {
 	/*TODO: For Later Use*/
 	P_ONE_= double() ;
 	P_TWO_= double() ;
+
+	alpha_a_ = alpha_b_ = alpha_c_ = 0.0;
+
+	delta_T_ = 0.0;
+	delta_X_ = 0.0;
+
+
+
 
 
 
