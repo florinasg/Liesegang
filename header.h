@@ -18,12 +18,13 @@
 
 
 
+
 /*easy console output*/
 template <typename T>
 void print(T t)
 {
 
-  std::cout << t << " " ;
+  std::cout << t << " " << std::flush;
 }
 
 template<typename T, typename... Args>

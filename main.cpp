@@ -18,7 +18,11 @@
 int main(int args, char * argv[])
 {
 
-
+	/*EASY: Create Instance wit Defines
+	 * -> ADVANCED: Use argv[]*/
+	Liesegang *liesegang = new Liesegang();
+	liesegang->InitializeTube();
+	liesegang->LiesegangGrowth(true);
 
 	return 0;
 }
