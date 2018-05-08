@@ -10,8 +10,8 @@
 
 
 #define DEF_GRID_N 1000 /*Number of discretization gridpoints*/
-#define DEF_DELTA_T 1 /*Discretization Time Steps*/
-#define	DEF_EXC_TIME 1000000
+#define DEF_DELTA_T 0.1 /*Discretization Time Steps*/
+#define	DEF_EXC_TIME 10000
 #define DEF_LOWER_BOUND 0
 #define DEF_UPPER_BOUND 1
 #define DEF_A_ZERO 1 /*1/m*/

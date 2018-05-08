@@ -50,10 +50,10 @@ Liesegang::Liesegang() {
 	std::string dir_name =".\\Results_"+prefix;
 	int check = _mkdir(dir_name.c_str());
 
-	a_concentration_hist.open("A_Concentration_"+prefix+".csv");
-	b_concentration_hist.open("B_Concentration_"+prefix+".csv");
-	c_concentration_hist.open("C_Concentration_"+prefix+".csv");
-	s_concentration_hist.open("D_Concentration_"+prefix+".csv");
+	a_concentration_hist.open("A_Concentration_"+prefix+".csv",std::fstream::trunc);
+	b_concentration_hist.open("B_Concentration_"+prefix+".csv",std::fstream::trunc);
+	c_concentration_hist.open("C_Concentration_"+prefix+".csv",std::fstream::trunc);
+	s_concentration_hist.open("S_Concentration_"+prefix+".csv",std::fstream::trunc);
 
 
 

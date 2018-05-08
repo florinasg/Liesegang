@@ -24,6 +24,7 @@ int main(int args, char * argv[])
 	liesegang->InitializeTube();
 	liesegang->LiesegangGrowth(true);
 
+	std::cout << "Admire the Structure..";
 	return 0;
 }
 

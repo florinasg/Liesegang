@@ -29,6 +29,7 @@ int Liesegang::LiesegangGrowth(bool dimensionalized)
 		alpha_b_ = D_b_ * delta_T_ * inverse_spatial;
 		alpha_c_ = D_c_ * delta_T_ * inverse_spatial;
 
+		print("CFL: " , alpha_a_, "\n");
 
 		/*Time Step Loop*/
 		for(double t = 1*(delta_T_); t <= double(DEF_EXC_TIME); t = t + delta_T_)
@@ -136,7 +137,7 @@ int Liesegang::LiesegangGrowth(bool dimensionalized)
 
 				/*-------------------------------------------------------------------------*/
 
-				/*CONCENTRATION C TODO: FIx line 145 for the special cases if needed*/
+				/*CONCENTRATION C TODO: Fix line 145 for the special cases if needed*/
 				tube_.back().at(idx).c_concentration =
 						tube_.at(I_time_step_-1).at(idx).c_concentration
 						+ alpha_c_* (tube_.at(I_time_step_-1).at(idx+1).c_concentration
