@@ -28,6 +28,8 @@ public:
 
 	int LiesegangGrowth(bool dimensionalized);
 
+	double Heaviside(double c_conc);
+
 
 
 
@@ -84,7 +86,10 @@ private:
 
 	/*Help Objects*/
 	std::ofstream test_file;
-
+	double I_time_step_; /*will serve as convenient access index for container*/
+	double alpha_a_;
+	double alpha_b_;
+	double alpha_c_;
 
 };
 
