@@ -12,19 +12,6 @@ Liesegang::Liesegang() {
 
 	test_file.open("Control_File.csv");
 
-	std::string prefix = "(Da:"+std::to_string(D_a_)+",Db:"+std::to_string(D_b_)
-	+",Dc:"+ std::to_string(D_c_)+",N1:"+std::to_string(N_one_)+",N2:"+std::to_string(N_two_)+
-	",R:"+std::to_string(R_)+",a0:"+std::to_string(a_zero_)+",b0:"+
-	std::to_string(b_zero_)+",c0:"+std::to_string(c_zero_)+")";
-
-	/*Creates Directory for */
-	std::string dir_name ="./Results"+prefix;
-	mkdir(dir_name.c_str());
-
-	a_concentration_hist.open("./Results"+prefix+"A_Concentration_"+prefix+".csv");
-	b_concentration_hist.open("./Results"+prefix+"B_Concentration_"+prefix+".csv");
-	c_concentration_hist.open("./Results"+prefix+"C_Concentration_"+prefix+".csv");
-	s_concentration_hist.open("./Results"+prefix+"D_Concentration_"+prefix+".csv");
 
 	/*Initialization of Parameter*/
 
@@ -38,7 +25,7 @@ Liesegang::Liesegang() {
 
 	D_a_= double(DEF_D_A) ;
 	D_b_= double(DEF_D_B) ;
-	D_c_= double(DEF_C_ZERO) ;
+	D_c_= double(DEF_D_C);
 	R_= double(DEF_R);
 	N_one_ = double(DEF_N);
 	N_two_= double(DEF_N) ;
@@ -54,6 +41,22 @@ Liesegang::Liesegang() {
 	delta_X_ = 0.0;
 
 
+	std::string prefix = "(Da="+std::to_string(D_a_)+",Db="+std::to_string(D_b_)
+	+",Dc="+ std::to_string(D_c_)+",N1="+std::to_string(N_one_)+",N2="+std::to_string(N_two_)+
+	",R="+std::to_string(R_)+",a0="+std::to_string(a_zero_)+",b0="+
+	std::to_string(b_zero_)+",c0="+std::to_string(c_zero_)+")";
+
+	/*Creates Directory for */
+	std::string dir_name =".\\Results_"+prefix;
+	int check = _mkdir(dir_name.c_str());
+
+	a_concentration_hist.open("A_Concentration_"+prefix+".csv");
+	b_concentration_hist.open("B_Concentration_"+prefix+".csv");
+	c_concentration_hist.open("C_Concentration_"+prefix+".csv");
+	s_concentration_hist.open("D_Concentration_"+prefix+".csv");
+
+
+
 
 
 
@@ -62,6 +65,11 @@ Liesegang::Liesegang() {
 
 Liesegang::~Liesegang()
 {
+	a_concentration_hist.close();
+	b_concentration_hist.close();
+	c_concentration_hist.close();
+	s_concentration_hist.close();
+
 	test_file.close();
 }
 
