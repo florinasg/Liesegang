@@ -13,7 +13,7 @@ double Liesegang::Heaviside(double c_conc)
 {
  if(c_conc < c_zero_)
  {
-	 return 0;
+	 return 0.0;
  }
 
  else if (c_conc == c_zero_)
@@ -23,7 +23,7 @@ double Liesegang::Heaviside(double c_conc)
 
  else if(c_conc >  c_zero_)
  {
-	 return 1;
+	 return 1.0;
  }
 
 return 0.0;

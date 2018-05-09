@@ -52,103 +52,110 @@ int Liesegang::LiesegangGrowth(bool dimensionalized)
 			{
 
 
-//								/*Special Cases*/
-//
-//								if(idx == 1)
-//								{
-//									/*CONCENTRATION A */
-//									tube_.back().at(idx).a_concentration =
-//											tube_.at(I_time_step_-1).at(idx).a_concentration
-//											+ alpha_a_* (tube_.at(I_time_step_-1).at(idx+1).a_concentration
-//													- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration)
-//													-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
-//
-//									/*CONCENTRATION B*/
-//									tube_.back().at(idx).b_concentration =
-//											tube_.at(I_time_step_-1).at(idx).b_concentration
-//											+ alpha_b_* (tube_.at(I_time_step_-1).at(idx+1).b_concentration
-//													- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration)
-//													-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;;
-//
-//									/*-------------------------------------------------------------------------*/
-//
-//									/*CONCENTRATION C*/
-//									tube_.back().at(idx).c_concentration =
-//											tube_.at(I_time_step_-1).at(idx).c_concentration
-//											+ alpha_c_* (tube_.at(I_time_step_-1).at(idx+1).c_concentration
-//													- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration)
-//													- N_one_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
-//													(double(pow(tube_.at(I_time_step_-1).at(idx).c_concentration,2)))
-//													- N_two_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
-//
-//								}
-//
-//
-//								if(idx == DEF_GRID_N-1)
-//								{
-//									/*CONCENTRATION A */
-//									tube_.back().at(idx).a_concentration =
-//											tube_.at(I_time_step_-1).at(idx).a_concentration
-//											+ alpha_a_*
-//											(- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration
-//													+ tube_.at(I_time_step_-1).at(idx-1).a_concentration)
-//													-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
-//
-//									/*CONCENTRATION B */
-//									tube_.back().at(idx).b_concentration =
-//											tube_.at(I_time_step_-1).at(idx).b_concentration
-//											+ alpha_b_*
-//											(- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration
-//													+ tube_.at(I_time_step_-1).at(idx-1).b_concentration)
-//													-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;;
-//
-//									/*-------------------------------------------------------------------------*/
-//
-//									/*CONCENTRATION C*/
-//									tube_.back().at(idx).c_concentration =
-//											tube_.at(I_time_step_-1).at(idx).c_concentration
-//											+ alpha_c_*
-//											(- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration
-//													+ tube_.at(I_time_step_-1).at(idx-1).c_concentration)
-//													- N_one_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
-//													(double(pow(tube_.at(I_time_step_-1).at(idx).c_concentration,2)))
-//													- N_two_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
-//
-//
-//
-//								}
+				/*Special Cases*/
+				/*LOWER BOUNDARY CASE*/
+				if(idx == 1)
+				{
+					/*CONCENTRATION A */
+					tube_.back().at(idx).a_concentration =
+							tube_.at(I_time_step_-1).at(idx).a_concentration
+							+ alpha_a_* (tube_.at(I_time_step_-1).at(idx+1).a_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration)
+									-delta_T_*R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
+
+					/*CONCENTRATION B*/
+					tube_.back().at(idx).b_concentration =
+							tube_.at(I_time_step_-1).at(idx).b_concentration
+							+ alpha_b_* (tube_.at(I_time_step_-1).at(idx+1).b_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration)
+									-R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
+
+					/*-------------------------------------------------------------------------*/
+
+					/*CONCENTRATION C*/
+					tube_.back().at(idx).c_concentration =
+							tube_.at(I_time_step_-1).at(idx).c_concentration
+							+ alpha_c_* (tube_.at(I_time_step_-1).at(idx+1).c_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration)
+									+ R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration
+									- N_one_*delta_T_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
+									(tube_.at(I_time_step_-1).at(idx).c_concentration*tube_.at(I_time_step_-1).at(idx).c_concentration)
+									- N_two_*delta_T_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
+
+				}
 
 
-				/*CONCENTRATION A */
-				tube_.back().at(idx).a_concentration =
-						tube_.at(I_time_step_-1).at(idx).a_concentration
-						+ alpha_a_* (tube_.at(I_time_step_-1).at(idx+1).a_concentration
-								- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration
-								+ tube_.at(I_time_step_-1).at(idx-1).a_concentration)
-								-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration	;
+				/*UPPER BOUNDARY CASE*/
+				if(idx == DEF_GRID_N-1)
+				{
+					/*CONCENTRATION A */
+					tube_.back().at(idx).a_concentration =
+							tube_.at(I_time_step_-1).at(idx).a_concentration
+							+ alpha_a_*
+							(- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).a_concentration)
+									-R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration
+									;
 
-				/*CONCENTRATION B */
-				tube_.back().at(idx).b_concentration =
-						tube_.at(I_time_step_-1).at(idx).b_concentration
-						+ alpha_b_* (tube_.at(I_time_step_-1).at(idx+1).b_concentration
-								- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration
-								+ tube_.at(I_time_step_-1).at(idx-1).b_concentration)
-								-R_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;;
+					/*CONCENTRATION B */
+					tube_.back().at(idx).b_concentration =
+							tube_.at(I_time_step_-1).at(idx).b_concentration
+							+ alpha_b_*
+							(- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).b_concentration)
+									-R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
 
-				/*-------------------------------------------------------------------------*/
+					/*-------------------------------------------------------------------------*/
 
-				/*CONCENTRATION C TODO: Fix line 145 for the special cases if needed*/
-				tube_.back().at(idx).c_concentration =
-						tube_.at(I_time_step_-1).at(idx).c_concentration
-						+ alpha_c_* (tube_.at(I_time_step_-1).at(idx+1).c_concentration
-								- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration
-								+ tube_.at(I_time_step_-1).at(idx-1).c_concentration)
-								+ R_*tube_.at(I_time_step_-1).at(idx).a_concentration*R_*tube_.at(I_time_step_-1).at(idx).b_concentration
-								- N_one_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
-								(double(pow(tube_.at(I_time_step_-1).at(idx).c_concentration,2)))
-								- N_two_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
+					/*CONCENTRATION C*/
+					tube_.back().at(idx).c_concentration =
+							tube_.at(I_time_step_-1).at(idx).c_concentration
+							+ alpha_c_*
+							(- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).c_concentration)
+									+ R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration
+									- N_one_*delta_T_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
+									(tube_.at(I_time_step_-1).at(idx).c_concentration*tube_.at(I_time_step_-1).at(idx).c_concentration)
+									- N_two_*delta_T_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
 
 
+
+				}
+
+				else
+				{
+
+
+					/*CONCENTRATION A */
+					tube_.back().at(idx).a_concentration =
+							tube_.at(I_time_step_-1).at(idx).a_concentration
+							+ alpha_a_* (tube_.at(I_time_step_-1).at(idx+1).a_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).a_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).a_concentration)
+									-R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration	;
+
+					/*CONCENTRATION B */
+					tube_.back().at(idx).b_concentration =
+							tube_.at(I_time_step_-1).at(idx).b_concentration
+							+ alpha_b_* (tube_.at(I_time_step_-1).at(idx+1).b_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).b_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).b_concentration)
+									-R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration;
+
+					/*-------------------------------------------------------------------------*/
+
+
+					tube_.back().at(idx).c_concentration =
+							tube_.at(I_time_step_-1).at(idx).c_concentration
+							+ alpha_c_* (tube_.at(I_time_step_-1).at(idx+1).c_concentration
+									- 2 * tube_.at(I_time_step_-1).at(idx).c_concentration
+									+ tube_.at(I_time_step_-1).at(idx-1).c_concentration)
+									+ R_*delta_T_*tube_.at(I_time_step_-1).at(idx).a_concentration*tube_.at(I_time_step_-1).at(idx).b_concentration
+									- N_one_*delta_T_* Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
+									(tube_.at(I_time_step_-1).at(idx).c_concentration*tube_.at(I_time_step_-1).at(idx).c_concentration)
+									- N_two_*delta_T_*tube_.at(I_time_step_-1).at(idx).c_concentration * tube_.at(I_time_step_-1).at(idx).s_concentration;
+
+				}
 
 
 
@@ -156,9 +163,9 @@ int Liesegang::LiesegangGrowth(bool dimensionalized)
 				/*CONCENTRATION S -> Boundary Conditions not Important*/
 				tube_.back().at(idx).s_concentration =
 						tube_.at(I_time_step_-1).at(idx).s_concentration
-						+ N_one_ *Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*
-						double(pow(tube_.at(I_time_step_-1).at(idx).c_concentration,2))
-						+ N_two_ * tube_.at(I_time_step_-1).at(idx).c_concentration* tube_.at(I_time_step_-1).at(idx).s_concentration;
+						+ N_one_ *Heaviside(tube_.at(I_time_step_-1).at(idx).c_concentration)*delta_T_*
+						(tube_.at(I_time_step_-1).at(idx).c_concentration*tube_.at(I_time_step_-1).at(idx).c_concentration)
+						+ N_two_ * tube_.at(I_time_step_-1).at(idx).c_concentration* tube_.at(I_time_step_-1).at(idx).s_concentration*delta_T_;
 
 
 
