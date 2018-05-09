@@ -129,6 +129,11 @@ int Liesegang::LiesegangGrowth(bool dimensionalized)
 			/*Time Step Increment*/
 			I_time_step_ = I_time_step_+1;
 
+
+			/*Erases not needed vector element @I_time_step-2 -> first element
+			 * THis should save memory*/
+			tube_.erase(tube_.begin());
+
 		}
 
 	}
