@@ -22,6 +22,7 @@ int Liesegang::LiesegangGrowth(int mode)
 	if(mode == 0)
 	{
 
+		/*Note: Difference to later defintion of inverse spatial*/
 		double inverse_spatial = (1/double(pow(delta_X_,2)));
 
 		/*Calculation of alpha factors*/
@@ -39,7 +40,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 			/*Restricts Output to later times*/
-			if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
+			if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
 			{
 				a_concentration_hist << tube_.back().at(0).a_concentration << ",";
 				b_concentration_hist << tube_.back().at(0).b_concentration << ",";
@@ -58,7 +59,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 
-				/*CONCENTRATION A */
+				/*CONCENTRATION A -> CORRECT*/
 				tube_.back().at(idx).a_concentration =
 						tube_.at(0).at(idx).a_concentration
 						+ alpha_a_* (tube_.at(0).at(idx+1).a_concentration
@@ -66,7 +67,7 @@ int Liesegang::LiesegangGrowth(int mode)
 								+ tube_.at(0).at(idx-1).a_concentration)
 								-R_*delta_T_*tube_.at(0).at(idx).a_concentration*tube_.at(0).at(idx).b_concentration	;
 
-				/*CONCENTRATION B */
+				/*CONCENTRATION B -> CORRECT*/
 				tube_.back().at(idx).b_concentration =
 						tube_.at(0).at(idx).b_concentration
 						+ alpha_b_* (tube_.at(0).at(idx+1).b_concentration
@@ -78,6 +79,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 
+				/*CONCENTRATION C*/
 
 
 				tube_.back().at(idx).c_concentration =
@@ -86,25 +88,26 @@ int Liesegang::LiesegangGrowth(int mode)
 								- 2 * tube_.at(0).at(idx).c_concentration
 								+ tube_.at(0).at(idx-1).c_concentration)
 								+ R_*delta_T_*tube_.at(0).at(idx).a_concentration*tube_.at(0).at(idx).b_concentration
-								- N_one_*delta_T_* Heaviside(tube_.at(0).at(idx).c_concentration)*
+								- N_one_*delta_T_* Heaviside(double(tube_.at(0).at(idx).c_concentration))*
 								(tube_.at(0).at(idx).c_concentration*tube_.at(0).at(idx).c_concentration)
 								- N_two_*delta_T_*tube_.at(0).at(idx).c_concentration * tube_.at(0).at(idx).s_concentration;
 
 
 
-				/*CONCENTRATION S -> Boundary Conditions not Important*/
+				/*CONCENTRATION S -> Boundary Conditions not Important
+				 * -> also seems to be correct*/
 				tube_.back().at(idx).s_concentration =
 						tube_.at(0).at(idx).s_concentration
-						+ N_one_ *Heaviside(tube_.at(0).at(idx).c_concentration)*delta_T_*
+						+ N_one_*delta_T_*Heaviside(double(tube_.at(0).at(idx).c_concentration))*
 						(tube_.at(0).at(idx).c_concentration*tube_.at(0).at(idx).c_concentration)
-						+ N_two_ * tube_.at(0).at(idx).c_concentration* tube_.at(0).at(idx).s_concentration*delta_T_;
+						+ N_two_ *delta_T_* tube_.at(0).at(idx).c_concentration* tube_.at(0).at(idx).s_concentration;
 
 
 				/*Restricts Output to later times*/
 
 
 				/*Creates File Ouput for Data Analysis*/
-				if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
+				if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
 				{
 					a_concentration_hist << tube_.back().at(idx).a_concentration << ",";
 					b_concentration_hist << tube_.back().at(idx).b_concentration << ",";
@@ -120,7 +123,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 			/*Restricts Output to later times*/
 
-			if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
+			if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
 			{
 				a_concentration_hist << tube_.back().back().a_concentration ;
 				b_concentration_hist << tube_.back().back().b_concentration ;
@@ -153,8 +156,8 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 
-
-		double inverse_spatial = (1/double(pow(delta_X_,2)));
+		/*NB! Redefinition of inverse_spatial*/
+		double inverse_spatial = (1/double(delta_X_));
 
 
 		/*RE-Calculation of Diffutions Functionals (former constants)

@@ -28,6 +28,7 @@ int main(int args, char * argv[])
 
 
 
+
 	if(args == 1)
 	{
 		std::cout << "Liesegang Growth with Constant Diffusion Constant..." << std::endl;
