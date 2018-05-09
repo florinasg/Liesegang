@@ -46,14 +46,15 @@ Liesegang::Liesegang() {
 	",R="+std::to_string(R_)+",a0="+std::to_string(a_zero_)+",b0="+
 	std::to_string(b_zero_)+",c0="+std::to_string(c_zero_)+")";
 
-	/*Creates Directory for */
-	std::string dir_name =".\\Results_"+prefix;
+	/*Creates Directory
+	 * NOTE: Make sure, that there is only one Results folder in the parent directory at at time */
+	std::string dir_name =".\\Results";
 	int check = _mkdir(dir_name.c_str());
 
-	a_concentration_hist.open("A_Concentration_"+prefix+".csv",std::fstream::trunc);
-	b_concentration_hist.open("B_Concentration_"+prefix+".csv",std::fstream::trunc);
-	c_concentration_hist.open("C_Concentration_"+prefix+".csv",std::fstream::trunc);
-	s_concentration_hist.open("S_Concentration_"+prefix+".csv",std::fstream::trunc);
+	a_concentration_hist.open(dir_name+"\\A_Concentration_"+prefix+".csv",std::fstream::trunc);
+	b_concentration_hist.open(dir_name+"\\B_Concentration_"+prefix+".csv",std::fstream::trunc);
+	c_concentration_hist.open(dir_name+"\\C_Concentration_"+prefix+".csv",std::fstream::trunc);
+	s_concentration_hist.open(dir_name+"\\S_Concentration_"+prefix+".csv",std::fstream::trunc);
 
 
 
