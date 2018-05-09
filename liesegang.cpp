@@ -75,4 +75,10 @@ Liesegang::~Liesegang()
 }
 
 
+double Liesegang::GetTimeStep()
+{
+	return I_time_step_;
+}
+
+
 

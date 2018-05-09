@@ -31,6 +31,8 @@ public:
 	double Heaviside(double c_conc);
 
 
+	double GetTimeStep();
+
 
 
 

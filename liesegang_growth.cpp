@@ -39,9 +39,8 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 			/*Restricts Output to later times*/
-			if(t >= (double(DEF_EXC_TIME)*5/6))
+			if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
 			{
-
 				a_concentration_hist << tube_.back().at(0).a_concentration << ",";
 				b_concentration_hist << tube_.back().at(0).b_concentration << ",";
 				c_concentration_hist <<tube_.back().at(0).c_concentration << ",";
@@ -102,10 +101,11 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 				/*Restricts Output to later times*/
-				if(t >= (double(DEF_EXC_TIME)*5/6))
-				{
 
-					/*Creates File Ouput for Data Analysis*/
+
+				/*Creates File Ouput for Data Analysis*/
+				if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
+				{
 					a_concentration_hist << tube_.back().at(idx).a_concentration << ",";
 					b_concentration_hist << tube_.back().at(idx).b_concentration << ",";
 					c_concentration_hist <<tube_.back().at(idx).c_concentration << ",";
@@ -120,7 +120,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 			/*Restricts Output to later times*/
 
-			if(t >= (double(DEF_EXC_TIME)*5/6))
+			if(t >= (double(DEF_EXC_TIME)-100*delta_T_))
 			{
 				a_concentration_hist << tube_.back().back().a_concentration ;
 				b_concentration_hist << tube_.back().back().b_concentration ;
@@ -131,11 +131,11 @@ int Liesegang::LiesegangGrowth(int mode)
 				b_concentration_hist << "\n";
 				c_concentration_hist << "\n";
 				s_concentration_hist << "\n";
+
 			}
 
-
 			/*Time Step Increment*/
-			I_time_step_ = I_time_step_+1;
+			I_time_step_ = I_time_step_+delta_T_;
 
 
 			/*Erases not needed vector element @I_time_step-2 -> first element
@@ -179,15 +179,16 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 			/*Restricts Output to later times*/
-			if(t >= (double(DEF_EXC_TIME)*5/6))
-			{
 
+
+			if(t >= (double(DEF_EXC_TIME)*299/300))
+			{
 				a_concentration_hist << tube_.back().at(0).a_concentration << ",";
 				b_concentration_hist << tube_.back().at(0).b_concentration << ",";
 				c_concentration_hist <<tube_.back().at(0).c_concentration << ",";
 				s_concentration_hist <<tube_.back().at(0).s_concentration << ",";
-			}
 
+			}
 			/*Spatial Loop - Iterates over Tube Units
 			 * mode 1 ->
 			 * changes equation system*/
@@ -265,10 +266,11 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 				/*Restricts Output to later times*/
-				if(t >= (double(DEF_EXC_TIME)*5/6))
-				{
 
-					/*Creates File Ouput for Data Analysis*/
+
+				/*Creates File Ouput for Data Analysis*/
+				if(t >= (double(DEF_EXC_TIME)*3/4))
+				{
 					a_concentration_hist << tube_.back().at(idx).a_concentration << ",";
 					b_concentration_hist << tube_.back().at(idx).b_concentration << ",";
 					c_concentration_hist <<tube_.back().at(idx).c_concentration << ",";
@@ -282,7 +284,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 			/*Restricts Output to later times*/
 
-			if(t >= (double(DEF_EXC_TIME)*5/6))
+			if(t >= (double(DEF_EXC_TIME)*3/4))
 			{
 				a_concentration_hist << tube_.back().back().a_concentration ;
 				b_concentration_hist << tube_.back().back().b_concentration ;
@@ -293,11 +295,11 @@ int Liesegang::LiesegangGrowth(int mode)
 				b_concentration_hist << "\n";
 				c_concentration_hist << "\n";
 				s_concentration_hist << "\n";
+
 			}
 
-
 			/*Time Step Increment*/
-			I_time_step_ = I_time_step_+1;
+			I_time_step_ = I_time_step_+delta_T_;
 
 
 			/*Erases not needed vector element @I_time_step-2 -> first element
