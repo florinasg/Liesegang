@@ -26,7 +26,7 @@ public:
 
 	int InitializeTube();
 
-	int LiesegangGrowth(bool dimensionalized);
+	int LiesegangGrowth(int mode);
 
 	double Heaviside(double c_conc);
 
@@ -39,7 +39,8 @@ private:
 	typedef struct TubeSpaceUnit_{
 		TubeSpaceUnit_(): a_concentration(0.0),
 				b_concentration(0.0),c_concentration(0.0),
-				s_concentration(0.0), time_step(0), position(-1.0){};
+				s_concentration(0.0), time_step(0), position(-1.0), P_block_a(0.0),
+				P_block_b(0.0), P_block_c(0.0){};
 		double a_concentration;
 		double b_concentration;
 		double c_concentration;
@@ -50,6 +51,16 @@ private:
 		double time_step;
 
 		double position;
+
+
+
+		/*----diffusion functional------*/
+
+		/*Introduces Quasi Variables  for Diffusion Functional*/
+
+		double P_block_a;
+		double P_block_b;
+		double P_block_c;
 
 	}TubeSpaceUnit_;
 
@@ -71,6 +82,9 @@ private:
 	double a_zero_;
 	double b_zero_;
 	double c_zero_;
+
+
+	double s_zero_;
 
 	double D_a_;
 	double D_b_;

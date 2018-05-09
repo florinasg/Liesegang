@@ -38,6 +38,12 @@ int Liesegang::InitializeTube()
 		tube_.back().back().c_concentration = 0.0;
 		tube_.back().back().s_concentration = 0.0;
 
+
+		tube_.back().back().P_block_a = 0.0;
+		tube_.back().back().P_block_b = 0.0;
+		tube_.back().back().P_block_c = 0.0;
+
+
 	}
 
 
@@ -54,12 +60,7 @@ int Liesegang::InitializeTube()
 	tube_template_ = tube_.back();
 
 
-	/*TEST Initialization*/
-//	for(int i = 0; i< tube_.back().size(); i++)
-//	{
-//		std::cout << tube_.back().at(i).position << " ";
-//		std::cout << tube_.back().size()<< std::endl;
-//	}
+
 
 	return 0;
 }
