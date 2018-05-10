@@ -13,8 +13,8 @@ int Liesegang::InitializeTube()
 {
 
 	/*Calculate DELTA_X as distance between grid-points*/
-	delta_X_ = 1 /
-			double(DEF_GRID_N-1);
+	delta_X_ = (1.0 /
+			double(DEF_GRID_N-1));
 
 
 	delta_T_ = double(DEF_DELTA_T);
@@ -27,11 +27,12 @@ int Liesegang::InitializeTube()
 	tube_.push_back(std::vector<TubeSpaceUnit_>());
 
 
+
 	/*Initializes Tube for Time Step 0*/
-	for(double idx  = a_; idx <=b_; idx = idx + delta_X_)
+	for(int i  = 0; i < DEF_GRID_N; i = i + 1)
 	{
 		tube_.back().push_back(TubeSpaceUnit_());
-		tube_.back().back().position = idx; /*Stores position of tube unit*/
+		tube_.back().back().position = i*delta_X_; /*Stores position of tube unit*/
 		tube_.back().back().time_step = 0;
 		tube_.back().back().a_concentration = 0.0;
 		tube_.back().back().b_concentration = 0.0;
@@ -42,6 +43,7 @@ int Liesegang::InitializeTube()
 		tube_.back().back().P_block_a = 0.0;
 		tube_.back().back().P_block_b = 0.0;
 		tube_.back().back().P_block_c = 0.0;
+
 
 
 	}

@@ -18,7 +18,7 @@ double Liesegang::Heaviside(double c_conc)
 
  else if (c_conc == c_zero_)
  {
-	 return 1/2;
+	 return 1/(2.0);
  }
 
  else if(c_conc >  c_zero_)

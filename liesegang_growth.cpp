@@ -40,7 +40,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 			/*Restricts Output to later times*/
-			if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
+			if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 			{
 				a_concentration_hist << tube_.back().at(0).a_concentration << ",";
 				b_concentration_hist << tube_.back().at(0).b_concentration << ",";
@@ -107,7 +107,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 				/*Creates File Ouput for Data Analysis*/
-				if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
+				if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 				{
 					a_concentration_hist << tube_.back().at(idx).a_concentration << ",";
 					b_concentration_hist << tube_.back().at(idx).b_concentration << ",";
@@ -123,7 +123,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 			/*Restricts Output to later times*/
 
-			if(t >= (double(DEF_EXC_TIME)-200*delta_T_))
+			if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 			{
 				a_concentration_hist << tube_.back().back().a_concentration ;
 				b_concentration_hist << tube_.back().back().b_concentration ;
@@ -184,7 +184,7 @@ int Liesegang::LiesegangGrowth(int mode)
 			/*Restricts Output to later times*/
 
 
-			if(t >= (double(DEF_EXC_TIME)*299/300))
+			if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 			{
 				a_concentration_hist << tube_.back().at(0).a_concentration << ",";
 				b_concentration_hist << tube_.back().at(0).b_concentration << ",";
@@ -204,11 +204,11 @@ int Liesegang::LiesegangGrowth(int mode)
 				 * -> used for P_block now
 				 * -> do NOT include timestep anymoe in this step*/
 
-				alpha_a_ = (1/1+(tube_.at(0).at(idx).s_concentration/s_zero_)) * D_a_
+				alpha_a_ = (1/(1+tube_.at(0).at(idx).s_concentration/s_zero_)) * D_a_
 						* inverse_spatial;
-				alpha_b_ = (1/1+(tube_.at(0).at(idx).s_concentration/s_zero_)) * D_b_
+				alpha_b_ = (1/(1+tube_.at(0).at(idx).s_concentration/s_zero_)) * D_b_
 						* inverse_spatial;
-				alpha_c_ = (1/1+(tube_.at(0).at(idx).s_concentration/s_zero_)) * D_c_
+				alpha_c_ = (1/(1+tube_.at(0).at(idx).s_concentration/s_zero_)) * D_c_
 						* inverse_spatial;
 
 				/*------------------------------------------*/
@@ -272,7 +272,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 
 				/*Creates File Ouput for Data Analysis*/
-				if(t >= (double(DEF_EXC_TIME)*3/4))
+				if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 				{
 					a_concentration_hist << tube_.back().at(idx).a_concentration << ",";
 					b_concentration_hist << tube_.back().at(idx).b_concentration << ",";
@@ -287,7 +287,7 @@ int Liesegang::LiesegangGrowth(int mode)
 
 			/*Restricts Output to later times*/
 
-			if(t >= (double(DEF_EXC_TIME)*3/4))
+			if(t >= (double(DEF_EXC_TIME)-500*delta_T_))
 			{
 				a_concentration_hist << tube_.back().back().a_concentration ;
 				b_concentration_hist << tube_.back().back().b_concentration ;
