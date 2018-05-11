@@ -12,16 +12,15 @@
 
 
 /*args = [
- * -
- * - NO ARGS
+ * 0 : (default) -> constant diffusion
+ * 1 : Diffusion Funnctional
  * -
  *
  * ]*/
 int main(int args, char * argv[])
 {
 
-	/*EASY: Create Instance wit Defines
-	 * -> ADVANCED: Use argv[]*/
+
 	Liesegang *liesegang = new Liesegang();
 	liesegang->InitializeTube();
 
@@ -31,13 +30,13 @@ int main(int args, char * argv[])
 
 	if(args == 1)
 	{
-		std::cout << "Liesegang Growth with Constant Diffusion Constant..." << std::endl;
+		std::cout << "Liesegang Growth with Constant Diffusion Coefficient..." << std::endl;
 		liesegang->LiesegangGrowth(0);
 		std::cout << "Admire the Structure..";
 	}
 	else if(atoi(argv[1]) == 0 || atoi(argv[1]) == 1)
 	{
-		std::cout << "Liesegang Growth with Diffusion Functionsl..." << std::endl;
+		std::cout << "Liesegang Growth with Diffusion Functional..." << std::endl;
 		liesegang->LiesegangGrowth(atoi(argv[1]));
 		std::cout << "Admire the Structure..";
 	}
