@@ -244,9 +244,12 @@ int Liesegang::LiesegangGrowth(int mode)
 				}
 
 
-				/*s > s0*/
+				/*s > 0*/
 				else
 				{
+
+
+					//print("hit\n");
 					/*NB! Redefinition of inverse_spatial*/
 					double inverse_spatial = (1/double(delta_X_));
 
@@ -294,14 +297,14 @@ int Liesegang::LiesegangGrowth(int mode)
 					tube_.back().at(idx).a_concentration =
 							tube_.at(0).at(idx).a_concentration
 							+ delta_T_ * inverse_spatial *
-							(tube_.back().at(idx+1).P_block_a - tube_.back().at(idx).P_block_a)
+							(tube_.back().at(idx).P_block_a - tube_.back().at(idx-1).P_block_a)
 							-R_*delta_T_*tube_.at(0).at(idx).a_concentration*tube_.at(0).at(idx).b_concentration	;
 
 					/*CONCENTRATION B */
 					tube_.back().at(idx).b_concentration =
 							tube_.at(0).at(idx).b_concentration
 							+ delta_T_ * inverse_spatial *
-							(tube_.back().at(idx+1).P_block_b - tube_.back().at(idx).P_block_b)
+							(tube_.back().at(idx).P_block_b - tube_.back().at(idx-1).P_block_b)
 							-R_*delta_T_*tube_.at(0).at(idx).a_concentration*tube_.at(0).at(idx).b_concentration;
 
 
@@ -310,7 +313,7 @@ int Liesegang::LiesegangGrowth(int mode)
 					tube_.back().at(idx).c_concentration =
 							tube_.at(0).at(idx).c_concentration
 							+ delta_T_ * inverse_spatial *
-							(tube_.back().at(idx+1).P_block_c - tube_.back().at(idx).P_block_c)
+							(tube_.back().at(idx).P_block_c - tube_.back().at(idx-1).P_block_c)
 							+ R_*delta_T_*tube_.at(0).at(idx).a_concentration*tube_.at(0).at(idx).b_concentration
 							- N_one_*delta_T_* Heaviside(tube_.at(0).at(idx).c_concentration)*
 							(tube_.at(0).at(idx).c_concentration*tube_.at(0).at(idx).c_concentration)

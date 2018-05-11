@@ -11,7 +11,7 @@
 
 #define DEF_GRID_N 500/* 1000 (WORKING) Number of discretization gridpoints TODO: Crucial*/
 #define DEF_DELTA_T 0.1 /*0.1 (WORKING) Discretization Time Steps TODO: Crucial*/
-#define	DEF_EXC_TIME 100000
+#define	DEF_EXC_TIME 1000000
 #define DEF_LOWER_BOUND 0.0
 #define DEF_UPPER_BOUND 1.0
 #define DEF_A_ZERO 1 /*1/m*/
